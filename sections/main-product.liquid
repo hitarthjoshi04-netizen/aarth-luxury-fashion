@@ -1,0 +1,235 @@
+{% stylesheet %}
+  .product-section {
+    background: {{ settings.color_background }};
+    color: {{ settings.color_text }};
+    padding: 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .product-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 2rem;
+  }
+
+  .product-image {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: {{ settings.color_secondary }};
+    border: 1px solid #2a2620;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: {{ settings.color_taupe }};
+    font-size: 1rem;
+    overflow: hidden;
+  }
+
+  .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .product-details h1 {
+    font-family: {{ settings.font_heading }};
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: {{ settings.color_text }};
+  }
+
+  .product-price {
+    font-family: {{ settings.font_heading }};
+    font-size: 1.8rem;
+    color: {{ settings.color_accent }};
+    margin-bottom: 2rem;
+  }
+
+  .product-description {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: {{ settings.color_text }};
+    margin-bottom: 2rem;
+    max-width: 500px;
+  }
+
+  .variant-selector {
+    margin-bottom: 2rem;
+  }
+
+  .variant-selector label {
+    display: block;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.8rem;
+    color: {{ settings.color_text }};
+  }
+
+  .variant-selector select {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.8rem;
+    background: {{ settings.color_secondary }};
+    color: {{ settings.color_text }};
+    border: 1px solid #2a2620;
+    font-family: {{ settings.font_body }};
+    cursor: pointer;
+  }
+
+  .quantity-selector {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    align-items: center;
+  }
+
+  .quantity-selector label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+  }
+
+  .quantity-selector input {
+    width: 80px;
+    padding: 0.8rem;
+    background: {{ settings.color_secondary }};
+    color: {{ settings.color_text }};
+    border: 1px solid #2a2620;
+    font-family: {{ settings.font_body }};
+    text-align: center;
+  }
+
+  .product-form button {
+    background: {{ settings.color_accent }};
+    color: {{ settings.color_background }};
+    padding: 1.2rem 3rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+  }
+
+  .product-form button:hover {
+    background: #d9b876;
+    transform: translateY(-2px);
+  }
+
+  .product-meta {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #2a2620;
+    font-size: 0.85rem;
+  }
+
+  .product-meta p {
+    margin-bottom: 0.5rem;
+    color: {{ settings.color_taupe }};
+  }
+
+  @media (max-width: 1024px) {
+    .product-container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .product-section {
+      padding: 2rem;
+    }
+
+    .product-details h1 {
+      font-size: 1.8rem;
+    }
+  }
+{% endstylesheet %}
+
+<section class="product-section">
+  <div class="product-breadcrumb">
+    <a href="/" style="color: {{ settings.color_taupe }}; text-decoration: none;">Home</a>
+    <span style="color: {{ settings.color_taupe }}; margin: 0 0.5rem;">/</span>
+    <a href="{{ product.collections.first.url }}" style="color: {{ settings.color_taupe }}; text-decoration: none;">{{ product.collections.first.title }}</a>
+    <span style="color: {{ settings.color_taupe }}; margin: 0 0.5rem;">/</span>
+    <span style="color: {{ settings.color_accent }};">{{ product.title }}</span>
+  </div>
+
+  <div class="product-container">
+    <div class="product-image">
+      {% if product.featured_image %}
+        <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}">
+      {% else %}
+        Product Image
+      {% endif %}
+    </div>
+
+    <div class="product-details">
+      <h1>{{ product.title }}</h1>
+      <div class="product-price">{{ product.price | money }}</div>
+
+      {% if product.description %}
+        <div class="product-description">{{ product.description | strip_html | truncatewords: 50 }}</div>
+      {% endif %}
+
+      <form action="/cart/add" method="post" class="product-form">
+        {% if product.variants.size > 1 %}
+          <div class="variant-selector">
+            <label for="variant">Select Variant</label>
+            <select name="id" id="variant">
+              {% for variant in product.variants %}
+                <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %}>
+                  {{ variant.title }} - {{ variant.price | money }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+        {% else %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {% endif %}
+
+        <div class="quantity-selector">
+          <label for="quantity">Quantity</label>
+          <input type="number" name="quantity" id="quantity" value="1" min="1" max="{{ product.selected_or_first_available_variant.available ? 999 : 0 }}">
+        </div>
+
+        <button type="submit" {% unless product.available %}disabled{% endunless %}>
+          {% if product.available %}
+            Add to Bag
+          {% else %}
+            Sold Out
+          {% endif %}
+        </button>
+      </form>
+
+      <div class="product-meta">
+        {% if product.selected_or_first_available_variant.sku %}
+          <p><strong>SKU:</strong> {{ product.selected_or_first_available_variant.sku }}</p>
+        {% endif %}
+        <p>
+          <strong>Availability:</strong>
+          {% if product.available %}
+            <span style="color: {{ settings.color_accent }};">In Stock</span>
+          {% else %}
+            <span style="color: #ff6b6b;">Sold Out</span>
+          {% endif %}
+        </p>
+        {% if product.vendor %}
+          <p><strong>Brand:</strong> {{ product.vendor }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Product Details"
+  }
+{% endschema %}
