@@ -1,0 +1,184 @@
+{% stylesheet %}
+  .founder-section {
+    padding: 8rem 4rem;
+  }
+
+  .founder-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .founder-image {
+    position: relative;
+  }
+
+  .founder-image-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    border: 2px solid {{ section.settings.color_accent }};
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: {{ section.settings.color_accent }};
+    font-size: 1rem;
+  }
+
+  .founder-image::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: calc(100% + 40px);
+    height: calc(100% + 40px);
+    border: 1px solid {{ section.settings.color_accent }};
+    z-index: -1;
+  }
+
+  .founder-content h3 {
+    font-family: {{ section.settings.font_heading }};
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: {{ section.settings.color_accent }};
+    margin-bottom: 1rem;
+  }
+
+  .founder-name {
+    font-family: {{ section.settings.font_heading }};
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .founder-title {
+    font-family: {{ section.settings.font_quote }};
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  .founder-divider {
+    width: 50px;
+    height: 1px;
+    background: {{ section.settings.color_accent }};
+    margin-bottom: 2rem;
+  }
+
+  .founder-bio {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .read-story {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  .read-story::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: {{ section.settings.color_accent }};
+    transition: width 0.3s ease;
+  }
+
+  .read-story:hover::after {
+    width: 100%;
+  }
+
+  @media (max-width: 1024px) {
+    .founder-container {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .founder-section {
+      padding: 4rem 2rem;
+    }
+  }
+{% endstylesheet %}
+
+<section class="founder-section" id="founder" style="background: {{ section.settings.color_light }}; color: {{ section.settings.color_background }};">
+  <div class="founder-container">
+    <div class="founder-image">
+      {% if section.settings.founder_image %}
+        <img src="{{ section.settings.founder_image | image_url: width: 500 }}" alt="{{ section.settings.founder_name }}" style="width: 100%; aspect-ratio: 3/4; object-fit: cover;">
+      {% else %}
+        <div class="founder-image-placeholder">Founder Portrait</div>
+      {% endif %}
+    </div>
+    <div class="founder-content">
+      <h3>{{ section.settings.founder_label }}</h3>
+      <h2 class="founder-name" style="color: {{ section.settings.color_background }};">{{ section.settings.founder_name }}</h2>
+      <p class="founder-title" style="color: {{ section.settings.color_taupe }};">{{ section.settings.founder_title }}</p>
+      <div class="founder-divider"></div>
+      <div class="founder-bio" style="color: {{ section.settings.color_background }};">
+        {{ section.settings.founder_bio }}
+      </div>
+      <a href="{{ section.settings.founder_story_link }}" class="read-story" style="color: {{ section.settings.color_accent }};">{{ section.settings.founder_story_text }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Founder Section",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "founder_image",
+        "label": "Founder Image"
+      },
+      {
+        "type": "text",
+        "id": "founder_label",
+        "label": "Founder Label",
+        "default": "The Founder"
+      },
+      {
+        "type": "text",
+        "id": "founder_name",
+        "label": "Founder Name",
+        "default": "Hitarth Joshi"
+      },
+      {
+        "type": "text",
+        "id": "founder_title",
+        "label": "Founder Title",
+        "default": "Founder, AARTH"
+      },
+      {
+        "type": "textarea",
+        "id": "founder_bio",
+        "label": "Founder Bio",
+        "default": "Hitarth Joshi is a designer and storyteller who believes that fashion is a language—one that transcends geography and speaks directly to the soul. Born and raised in Gujarat, Hitarth's work is deeply rooted in the rich textile heritage of his home, yet inspired by the global conversations shaping contemporary style.\n\nWith AARTH, Hitarth has created more than a brand. It's a movement that champions heritage, celebrates craft, and moves with intention. Every collection tells a story; every piece carries meaning."
+      },
+      {
+        "type": "text",
+        "id": "founder_story_text",
+        "label": "Story Link Text",
+        "default": "Read the Full Story"
+      },
+      {
+        "type": "url",
+        "id": "founder_story_link",
+        "label": "Story Link URL"
+      }
+    ]
+  }
+{% endschema %}

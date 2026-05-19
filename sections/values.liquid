@@ -1,0 +1,139 @@
+{% stylesheet %}
+  .values-section {
+    padding: 8rem 4rem;
+  }
+
+  .values-title {
+    font-family: {{ section.settings.font_heading }};
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 4rem;
+    letter-spacing: 2px;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .value-card {
+    text-align: center;
+  }
+
+  .value-number {
+    font-family: {{ section.settings.font_heading }};
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+  }
+
+  .value-title {
+    font-family: {{ section.settings.font_heading }};
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .value-description {
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 1024px) {
+    .values-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .values-section {
+      padding: 4rem 2rem;
+    }
+  }
+{% endstylesheet %}
+
+<section class="values-section" id="values" style="background: {{ section.settings.color_background }};">
+  <h2 class="values-title" style="color: {{ section.settings.color_text }};">{{ section.settings.values_title }}</h2>
+  <div class="values-grid">
+    {% for block in section.blocks %}
+      <div class="value-card">
+        <div class="value-number" style="color: {{ section.settings.color_accent }};">0{{ forloop.index }}</div>
+        <h3 class="value-title" style="color: {{ section.settings.color_text }};">{{ block.settings.value_title }}</h3>
+        <p class="value-description" style="color: {{ section.settings.color_taupe }};">{{ block.settings.value_description }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Values Section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "values_title",
+        "label": "Section Title",
+        "default": "Our Values"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "value",
+        "name": "Value",
+        "settings": [
+          {
+            "type": "text",
+            "id": "value_title",
+            "label": "Value Title",
+            "default": "Heritage"
+          },
+          {
+            "type": "textarea",
+            "id": "value_description",
+            "label": "Value Description",
+            "default": "Every thread carries the story of Gujarat's rich textile traditions. We honor the past while creating for the future."
+          }
+        ]
+      },
+      {
+        "type": "value",
+        "name": "Value",
+        "settings": [
+          {
+            "type": "text",
+            "id": "value_title",
+            "label": "Value Title",
+            "default": "Craft"
+          },
+          {
+            "type": "textarea",
+            "id": "value_description",
+            "label": "Value Description",
+            "default": "Premium materials, meticulous attention to detail, and respect for the artisans who bring our vision to life."
+          }
+        ]
+      },
+      {
+        "type": "value",
+        "name": "Value",
+        "settings": [
+          {
+            "type": "text",
+            "id": "value_title",
+            "label": "Value Title",
+            "default": "Intention"
+          },
+          {
+            "type": "textarea",
+            "id": "value_description",
+            "label": "Value Description",
+            "default": "Nothing is random. Every decision, every design choice, every material is deliberate and meaningful."
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

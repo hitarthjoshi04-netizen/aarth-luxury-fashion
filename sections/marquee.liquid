@@ -1,0 +1,51 @@
+{% stylesheet %}
+  .marquee-section {
+    background: {{ section.settings.color_secondary }};
+    padding: 2rem 0;
+    overflow: hidden;
+  }
+
+  .marquee {
+    display: flex;
+    animation: scroll 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  .marquee-item {
+    padding: 0 3rem;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+{% endstylesheet %}
+
+<section class="marquee-section">
+  <div class="marquee" id="marquee">
+    <span class="marquee-item" style="color: {{ section.settings.color_taupe }};">Gujarati Heritage</span>
+    <span class="marquee-item" style="color: {{ section.settings.color_taupe }};">·</span>
+    <span class="marquee-item" style="color: {{ section.settings.color_taupe }};">Premium Craft</span>
+    <span class="marquee-item" style="color: {{ section.settings.color_taupe }};">·</span>
+    <span class="marquee-item" style="color: {{ section.settings.color_taupe }};">Summer 2026</span>
+    <span class="marquee-item" style="color: {{ section.settings.color_taupe }};">·</span>
+    <span class="marquee-item" style="color: {{ section.settings.color_taupe }};">Limited Drop</span>
+    <span class="marquee-item" style="color: {{ section.settings.color_taupe }};">·</span>
+    <span class="marquee-item" style="color: {{ section.settings.color_taupe }};">{{ section.settings.brand_name }}</span>
+  </div>
+</section>
+
+<script>
+  const marquee = document.getElementById('marquee');
+  const marqueeContent = marquee.innerHTML;
+  marquee.innerHTML += marqueeContent;
+</script>
+
+{% schema %}
+  {
+    "name": "Marquee Strip"
+  }
+{% endschema %}

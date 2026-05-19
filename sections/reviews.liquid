@@ -1,0 +1,140 @@
+{% stylesheet %}
+  .reviews-section {
+    padding: 8rem 4rem;
+  }
+
+  .reviews-title {
+    font-family: {{ section.settings.font_heading }};
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 4rem;
+    letter-spacing: 2px;
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .review-card {
+    padding: 2rem;
+    border: 1px solid #2a2620;
+  }
+
+  .review-stars {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+  }
+
+  .review-text {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    font-style: italic;
+  }
+
+  .review-author {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 1024px) {
+    .reviews-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .reviews-section {
+      padding: 4rem 2rem;
+    }
+  }
+{% endstylesheet %}
+
+<section class="reviews-section" style="background: {{ section.settings.color_background }};">
+  <h2 class="reviews-title" style="color: {{ section.settings.color_text }};">{{ section.settings.reviews_title }}</h2>
+  <div class="reviews-grid">
+    {% for i in (1..3) %}
+      <div class="review-card" style="background: {{ section.settings.color_secondary }};">
+        <div class="review-stars" style="color: {{ section.settings.color_accent }};">★★★★★</div>
+        <p class="review-text" style="color: {{ section.settings.color_text }};">{{ section.blocks[i-1].settings.review_text }}</p>
+        <p class="review-author" style="color: {{ section.settings.color_taupe }};">— {{ section.blocks[i-1].settings.review_author }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Reviews Section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "reviews_title",
+        "label": "Section Title",
+        "default": "Loved by Our Community"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "review",
+        "name": "Review",
+        "settings": [
+          {
+            "type": "textarea",
+            "id": "review_text",
+            "label": "Review Text",
+            "default": "The intention behind every stitch is felt. Not just a tee—a piece of art that carries meaning forward."
+          },
+          {
+            "type": "text",
+            "id": "review_author",
+            "label": "Review Author",
+            "default": "Priya M., Mumbai"
+          }
+        ]
+      },
+      {
+        "type": "review",
+        "name": "Review",
+        "settings": [
+          {
+            "type": "textarea",
+            "id": "review_text",
+            "label": "Review Text",
+            "default": "Rooted in heritage, yet so contemporary. The quality is impeccable, and the story behind each piece resonates deeply."
+          },
+          {
+            "type": "text",
+            "id": "review_author",
+            "label": "Review Author",
+            "default": "Arjun K., Delhi"
+          }
+        ]
+      },
+      {
+        "type": "review",
+        "name": "Review",
+        "settings": [
+          {
+            "type": "textarea",
+            "id": "review_text",
+            "label": "Review Text",
+            "default": "Finally, a brand that moves beyond trends. AARTH is about connection, craft, and carrying something meaningful."
+          },
+          {
+            "type": "text",
+            "id": "review_author",
+            "label": "Review Author",
+            "default": "Saira N., London"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

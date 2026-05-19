@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }}{% if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif %}</title>
+    {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ content_for_header }}
+  </head>
+  <body>
+    {% sections 'header' %}
+    <main id="MainContent" class="content-for-layout focus-none">
+      {{ content_for_layout }}
+    </main>
+    {% sections 'footer' %}
+    {{ 'theme.js' | asset_url | script_tag }}
+  </body>
+</html>

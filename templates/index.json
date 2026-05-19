@@ -1,0 +1,137 @@
+{
+  "sections": {
+    "header": {
+      "type": "navbar",
+      "settings": {
+        "brand_name": "AARTH"
+      }
+    },
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "hero_top_text": "Move with Meaning",
+        "hero_tagline": "A language only the soul understands."
+      }
+    },
+    "marquee": {
+      "type": "marquee",
+      "settings": {}
+    },
+    "philosophy": {
+      "type": "philosophy",
+      "settings": {
+        "philosophy_quote": "We don't make clothes. We carry stories forward.",
+        "philosophy_text": "Each piece is carefully crafted with intention, rooted in heritage and woven with meaning. AARTH represents more than fashion—it's a conversation between tradition and contemporary expression, between the soul and the world."
+      }
+    },
+    "products": {
+      "type": "products-grid",
+      "settings": {
+        "products_title": "The Collection",
+        "products_per_row": 2
+      }
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {
+        "reviews_title": "Loved by Our Community"
+      },
+      "blocks": {
+        "review1": {
+          "type": "review",
+          "settings": {
+            "review_text": "The intention behind every stitch is felt. Not just a tee—a piece of art that carries meaning forward. AARTH understands the soul of fashion.",
+            "review_author": "Priya M., Mumbai"
+          }
+        },
+        "review2": {
+          "type": "review",
+          "settings": {
+            "review_text": "Rooted in heritage, yet so contemporary. The quality is impeccable, and the story behind each piece resonates with me on a deeper level.",
+            "review_author": "Arjun K., Delhi"
+          }
+        },
+        "review3": {
+          "type": "review",
+          "settings": {
+            "review_text": "Finally, a brand that moves beyond trends. AARTH is about connection, craft, and carrying something meaningful. Absolutely loved it.",
+            "review_author": "Saira N., London"
+          }
+        }
+      }
+    },
+    "editorial": {
+      "type": "editorial-quote",
+      "settings": {
+        "editorial_quote": "Rooted in Gujarat. Worn by the world."
+      }
+    },
+    "founder": {
+      "type": "founder",
+      "settings": {
+        "founder_label": "The Founder",
+        "founder_name": "Hitarth Joshi",
+        "founder_title": "Founder, AARTH",
+        "founder_bio": "Hitarth Joshi is a designer and storyteller who believes that fashion is a language—one that transcends geography and speaks directly to the soul. Born and raised in Gujarat, Hitarth's work is deeply rooted in the rich textile heritage of his home, yet inspired by the global conversations shaping contemporary style.\n\nWith AARTH, Hitarth has created more than a brand. It's a movement that champions heritage, celebrates craft, and moves with intention. Every collection tells a story; every piece carries meaning.",
+        "founder_story_text": "Read the Full Story",
+        "founder_story_link": "/pages/about"
+      }
+    },
+    "values": {
+      "type": "values",
+      "settings": {
+        "values_title": "Our Values"
+      },
+      "blocks": {
+        "value1": {
+          "type": "value",
+          "settings": {
+            "value_title": "Heritage",
+            "value_description": "Every thread carries the story of Gujarat's rich textile traditions. We honor the past while creating for the future."
+          }
+        },
+        "value2": {
+          "type": "value",
+          "settings": {
+            "value_title": "Craft",
+            "value_description": "Premium materials, meticulous attention to detail, and respect for the artisans who bring our vision to life."
+          }
+        },
+        "value3": {
+          "type": "value",
+          "settings": {
+            "value_title": "Intention",
+            "value_description": "Nothing is random. Every decision, every design choice, every material is deliberate and meaningful."
+          }
+        }
+      }
+    },
+    "instagram": {
+      "type": "instagram",
+      "settings": {
+        "instagram_title": "Follow the World of AARTH",
+        "instagram_handle": "@aarth.uk"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "newsletter_title": "Be the First to Know",
+        "newsletter_subtitle": "New drops. Stories. Nothing else.",
+        "input_placeholder": "Your email address",
+        "button_text": "Subscribe"
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "brand_name": "AARTH",
+        "brand_tagline": "Move with Meaning.",
+        "instagram_handle": "aarth.uk",
+        "twitter_handle": "aarthuk",
+        "pinterest_handle": "aarthuk"
+      }
+    }
+  },
+  "order": ["header", "hero", "marquee", "philosophy", "products", "reviews", "editorial", "founder", "values", "instagram", "newsletter", "footer"]
+}

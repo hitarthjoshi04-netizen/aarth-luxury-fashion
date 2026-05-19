@@ -1,0 +1,107 @@
+{% stylesheet %}
+  .hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem;
+    margin-top: 4rem;
+  }
+
+  .hero-top {
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.3s forwards;
+  }
+
+  .hero-title {
+    font-family: {{ section.settings.font_heading }};
+    font-size: 9rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+    line-height: 1;
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.6s forwards;
+  }
+
+  .hero-quote {
+    font-family: {{ section.settings.font_quote }};
+    font-size: 1.8rem;
+    font-style: italic;
+    margin: 3rem 0;
+    max-width: 600px;
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.9s forwards;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 3rem;
+    opacity: 0;
+    animation: fadeInUp 1s ease 1.2s forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 3rem;
+    }
+
+    .hero-quote {
+      font-size: 1rem;
+    }
+
+    .hero-buttons {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+{% endstylesheet %}
+
+<section class="hero" style="background: {{ section.settings.color_background }};">
+  <div class="hero-top" style="color: {{ section.settings.color_taupe }};">{{ section.settings.hero_top_text }}</div>
+  <h1 class="hero-title" style="color: {{ section.settings.color_text }};">{{ section.settings.brand_name }}</h1>
+  <p class="hero-quote" style="color: {{ section.settings.color_accent }};">{{ section.settings.hero_tagline }}</p>
+  <div class="hero-buttons">
+    <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'});" style="background: {{ section.settings.color_accent }}; color: {{ section.settings.color_background }};">Shop the Drop</button>
+    <button class="btn-secondary" onclick="document.getElementById('founder').scrollIntoView({behavior: 'smooth'});" style="color: {{ section.settings.color_text }}; border: 1px solid {{ section.settings.color_text }};">Our Story</button>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Hero Section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "hero_top_text",
+        "label": "Hero Top Text",
+        "default": "Move with Meaning"
+      },
+      {
+        "type": "text",
+        "id": "hero_tagline",
+        "label": "Hero Quote/Tagline",
+        "default": "A language only the soul understands."
+      }
+    ]
+  }
+{% endschema %}

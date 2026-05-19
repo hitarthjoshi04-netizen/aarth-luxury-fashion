@@ -1,0 +1,188 @@
+{% stylesheet %}
+  .products-section {
+    padding: 8rem 4rem;
+  }
+
+  .products-title {
+    font-family: {{ section.settings.font_heading }};
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 4rem;
+    letter-spacing: 2px;
+  }
+
+  .products-grid {
+    display: grid;
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .product-card {
+    position: relative;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    overflow: hidden;
+    border: 1px solid #2a2620;
+    transition: all 0.3s ease;
+  }
+
+  .product-card::before {
+    content: 'A';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: {{ section.settings.font_heading }};
+    font-size: 6rem;
+    color: rgba(201, 168, 108, 0.1);
+    font-weight: 700;
+    letter-spacing: 3px;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .product-info {
+    position: relative;
+    z-index: 2;
+  }
+
+  .product-name {
+    font-family: {{ section.settings.font_heading }};
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-details {
+    font-size: 0.85rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .product-price {
+    font-family: {{ section.settings.font_heading }};
+    font-size: 1.1rem;
+    color: {{ section.settings.color_accent }};
+  }
+
+  .product-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(20, 18, 15, 0.95);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    z-index: 3;
+  }
+
+  .product-card:hover .product-overlay {
+    opacity: 1;
+  }
+
+  .size-selector {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .size-btn {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid {{ section.settings.color_taupe }};
+    color: {{ section.settings.color_text }};
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .size-btn:hover {
+    border-color: {{ section.settings.color_accent }};
+    color: {{ section.settings.color_accent }};
+  }
+
+  @media (max-width: 1024px) {
+    .products-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .products-section {
+      padding: 4rem 2rem;
+    }
+  }
+{% endstylesheet %}
+
+<section class="products-section" id="products" style="background: {{ section.settings.color_background }};">
+  <h2 class="products-title" style="color: {{ section.settings.color_text }};">{{ section.settings.products_title }}</h2>
+  <div class="products-grid" style="grid-template-columns: repeat({{ section.settings.products_per_row }}, 1fr);">
+    {% for product in section.settings.featured_collection.products limit: 4 %}
+      <div class="product-card" style="background: {{ section.settings.color_secondary }};">
+        <div class="product-info">
+          <div class="product-name" style="color: {{ section.settings.color_text }};">{{ product.title }}</div>
+          <div class="product-details" style="color: {{ section.settings.color_taupe }};">
+            {% for option in product.options %}
+              {% if option.name == 'Material' %}
+                100% {{ product.selected_or_first_available_variant.option1 }} · Premium Weight
+              {% endif %}
+            {% endfor %}
+          </div>
+          <div class="product-price">{{ product.price | money }}</div>
+        </div>
+        <div class="product-overlay">
+          <div class="size-selector">
+            <button class="size-btn">S</button>
+            <button class="size-btn">M</button>
+            <button class="size-btn">L</button>
+            <button class="size-btn">XL</button>
+            <button class="size-btn">XXL</button>
+          </div>
+          <form action="/cart/add" method="post" style="width: 100%;">
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <button type="submit" class="btn-add-bag" style="background: {{ section.settings.color_accent }}; color: {{ section.settings.color_background }}; width: 100%; padding: 0.8rem 2rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; font-size: 0.8rem; margin-top: 1rem; border: none; cursor: pointer;">Add to Bag</button>
+          </form>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Products Grid",
+    "settings": [
+      {
+        "type": "text",
+        "id": "products_title",
+        "label": "Section Title",
+        "default": "The Collection"
+      },
+      {
+        "type": "collection",
+        "id": "featured_collection",
+        "label": "Featured Collection"
+      },
+      {
+        "type": "range",
+        "id": "products_per_row",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "unit": "col",
+        "label": "Products Per Row",
+        "default": 2
+      }
+    ]
+  }
+{% endschema %}

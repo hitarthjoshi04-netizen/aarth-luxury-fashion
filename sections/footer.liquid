@@ -1,0 +1,187 @@
+{% stylesheet %}
+  .footer {
+    border-top: 1px solid #2a2620;
+    padding: 4rem;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+    max-width: 1400px;
+    margin: 0 auto 4rem;
+  }
+
+  .footer-column h4 {
+    font-family: {{ section.settings.font_heading }};
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-brand {
+    font-family: {{ section.settings.font_heading }};
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-tagline {
+    font-family: {{ section.settings.font_quote }};
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+
+  .footer-links {
+    list-style: none;
+  }
+
+  .footer-links li {
+    margin-bottom: 0.8rem;
+  }
+
+  .footer-links a {
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: {{ section.settings.color_accent }};
+  }
+
+  .footer-bottom {
+    border-top: 1px solid #2a2620;
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    font-size: 0.85rem;
+  }
+
+  .footer-policies {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .footer-policies a {
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-policies a:hover {
+    color: {{ section.settings.color_accent }};
+  }
+
+  @media (max-width: 1024px) {
+    .footer-top {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .footer {
+      padding: 2rem;
+    }
+
+    .footer-top {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }
+{% endstylesheet %}
+
+<footer class="footer" style="background: {{ section.settings.color_background }}; color: {{ section.settings.color_text }};">
+  <div class="footer-top">
+    <div class="footer-column">
+      <div class="footer-brand" style="color: {{ section.settings.color_accent }};">{{ section.settings.brand_name }}</div>
+      <div class="footer-tagline" style="color: {{ section.settings.color_taupe }};">{{ section.settings.brand_tagline }}</div>
+    </div>
+
+    <div class="footer-column">
+      <h4>Navigate</h4>
+      <ul class="footer-links" style="color: {{ section.settings.color_taupe }};">
+        <li><a href="#philosophy">Philosophy</a></li>
+        <li><a href="#products">Shop</a></li>
+        <li><a href="#founder">Founder</a></li>
+        <li><a href="#values">Values</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h4>Support</h4>
+      <ul class="footer-links" style="color: {{ section.settings.color_taupe }};">
+        <li><a href="/pages/contact">Contact Us</a></li>
+        <li><a href="/policies/shipping-policy">Shipping Info</a></li>
+        <li><a href="/policies/refund-policy">Returns</a></li>
+        <li><a href="/pages/faq">FAQs</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h4>Connect</h4>
+      <ul class="footer-links" style="color: {{ section.settings.color_taupe }};">
+        <li><a href="https://instagram.com/{{ section.settings.instagram_handle | remove: '@' }}" target="_blank">Instagram</a></li>
+        <li><a href="https://twitter.com/{{ section.settings.twitter_handle }}" target="_blank">Twitter</a></li>
+        <li><a href="https://pinterest.com/{{ section.settings.pinterest_handle }}" target="_blank">Pinterest</a></li>
+        <li><a href="/pages/press">Press</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom" style="color: {{ section.settings.color_taupe }};">
+    <p>&copy; 2026 {{ section.settings.brand_name }}. All rights reserved.</p>
+    <ul class="footer-policies" style="color: {{ section.settings.color_taupe }};">
+      <li><a href="/policies/privacy-policy">Privacy Policy</a></li>
+      <li><a href="/policies/terms-of-service">Terms of Service</a></li>
+      <li><a href="/policies/cookie-policy">Cookie Policy</a></li>
+    </ul>
+  </div>
+</footer>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "text",
+        "id": "brand_name",
+        "label": "Brand Name",
+        "default": "AARTH"
+      },
+      {
+        "type": "text",
+        "id": "brand_tagline",
+        "label": "Brand Tagline",
+        "default": "Move with Meaning."
+      },
+      {
+        "type": "text",
+        "id": "instagram_handle",
+        "label": "Instagram Handle",
+        "default": "aarth.uk"
+      },
+      {
+        "type": "text",
+        "id": "twitter_handle",
+        "label": "Twitter Handle",
+        "default": "aarthuk"
+      },
+      {
+        "type": "text",
+        "id": "pinterest_handle",
+        "label": "Pinterest Handle",
+        "default": "aarthuk"
+      }
+    ]
+  }
+{% endschema %}

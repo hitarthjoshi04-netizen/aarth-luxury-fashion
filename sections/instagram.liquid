@@ -1,0 +1,112 @@
+{% stylesheet %}
+  .instagram-section {
+    padding: 8rem 4rem;
+  }
+
+  .instagram-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .instagram-title {
+    font-family: {{ section.settings.font_heading }};
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  .instagram-handle {
+    font-size: 1rem;
+    letter-spacing: 1px;
+  }
+
+  .instagram-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+  }
+
+  .instagram-tile {
+    aspect-ratio: 1;
+    border: 1px solid #2a2620;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .instagram-tile:hover {
+    border-color: {{ section.settings.color_accent }};
+  }
+
+  .instagram-button {
+    display: block;
+    margin: 0 auto;
+    background: transparent;
+    padding: 1rem 2.5rem;
+    border: 1px solid {{ section.settings.color_text }};
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .instagram-button:hover {
+    background: {{ section.settings.color_text }};
+  }
+
+  @media (max-width: 1024px) {
+    .instagram-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .instagram-section {
+      padding: 4rem 2rem;
+    }
+
+    .instagram-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+{% endstylesheet %}
+
+<section class="instagram-section" id="instagram" style="background: {{ section.settings.color_background }};">
+  <div class="instagram-header">
+    <h2 class="instagram-title" style="color: {{ section.settings.color_text }};">{{ section.settings.instagram_title }}</h2>
+    <p class="instagram-handle" style="color: {{ section.settings.color_accent }};">{{ section.settings.instagram_handle }}</p>
+  </div>
+  <div class="instagram-grid">
+    {% for i in (1..6) %}
+      <div class="instagram-tile" style="background: {{ section.settings.color_secondary }}; color: {{ section.settings.color_taupe }};">Post {{ i }}</div>
+    {% endfor %}
+  </div>
+  <button class="instagram-button" onclick="window.open('https://instagram.com/{{ section.settings.instagram_handle | remove: '@' }}', '_blank');" style="color: {{ section.settings.color_text }};">Follow on Instagram</button>
+</section>
+
+{% schema %}
+  {
+    "name": "Instagram Section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "instagram_title",
+        "label": "Section Title",
+        "default": "Follow the World of AARTH"
+      },
+      {
+        "type": "text",
+        "id": "instagram_handle",
+        "label": "Instagram Handle",
+        "default": "@aarth.uk"
+      }
+    ]
+  }
+{% endschema %}

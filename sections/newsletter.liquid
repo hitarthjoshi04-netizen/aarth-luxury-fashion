@@ -1,0 +1,111 @@
+{% stylesheet %}
+  .newsletter-section {
+    padding: 6rem 4rem;
+    text-align: center;
+  }
+
+  .newsletter-title {
+    font-family: {{ section.settings.font_heading }};
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+  }
+
+  .newsletter-subtitle {
+    font-size: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 0;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .newsletter-input {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    background: white;
+    border: 1px solid {{ section.settings.color_taupe }};
+    font-family: {{ section.settings.font_body }};
+    font-size: 0.95rem;
+    color: {{ section.settings.color_background }};
+  }
+
+  .newsletter-input::placeholder {
+    color: {{ section.settings.color_taupe }};
+  }
+
+  .newsletter-input:focus {
+    outline: none;
+    border-color: {{ section.settings.color_accent }};
+  }
+
+  .btn-subscribe {
+    background: {{ section.settings.color_accent }};
+    color: {{ section.settings.color_background }};
+    padding: 1rem 2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    border: 1px solid {{ section.settings.color_accent }};
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-subscribe:hover {
+    background: #d9b876;
+    border-color: #d9b876;
+  }
+
+  @media (max-width: 768px) {
+    .newsletter-section {
+      padding: 3rem 2rem;
+    }
+  }
+{% endstylesheet %}
+
+<section class="newsletter-section" style="background: {{ section.settings.color_light }}; color: {{ section.settings.color_background }};">
+  <h2 class="newsletter-title" style="color: {{ section.settings.color_background }};">{{ section.settings.newsletter_title }}</h2>
+  <p class="newsletter-subtitle" style="color: {{ section.settings.color_taupe }};">{{ section.settings.newsletter_subtitle }}</p>
+  <form class="newsletter-form" method="POST" action="/contact#contact_form">
+    <input type="hidden" name="contact[email]" value="">
+    <input type="email" class="newsletter-input" name="contact[email]" placeholder="{{ section.settings.input_placeholder }}" required>
+    <button type="submit" class="btn-subscribe">{{ section.settings.button_text }}</button>
+  </form>
+</section>
+
+{% schema %}
+  {
+    "name": "Newsletter Section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "newsletter_title",
+        "label": "Section Title",
+        "default": "Be the First to Know"
+      },
+      {
+        "type": "text",
+        "id": "newsletter_subtitle",
+        "label": "Subtitle",
+        "default": "New drops. Stories. Nothing else."
+      },
+      {
+        "type": "text",
+        "id": "input_placeholder",
+        "label": "Input Placeholder",
+        "default": "Your email address"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Subscribe"
+      }
+    ]
+  }
+{% endschema %}

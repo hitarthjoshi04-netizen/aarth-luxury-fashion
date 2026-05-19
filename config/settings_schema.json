@@ -1,0 +1,133 @@
+[
+  {
+    "name": "theme",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background Color",
+        "default": "#14120f"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text Color",
+        "default": "#f5f1ea"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Gold Accent Color",
+        "default": "#c9a86c"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Secondary Dark Color",
+        "default": "#1e1a14"
+      },
+      {
+        "type": "color",
+        "id": "color_taupe",
+        "label": "Taupe Color",
+        "default": "#8a7d72"
+      },
+      {
+        "type": "color",
+        "id": "color_light",
+        "label": "Light Background Color",
+        "default": "#f5f1ea"
+      },
+      {
+        "type": "header",
+        "content": "Typography"
+      },
+      {
+        "type": "text",
+        "id": "font_heading",
+        "label": "Heading Font (CSS name)",
+        "default": "Cinzel, serif"
+      },
+      {
+        "type": "text",
+        "id": "font_quote",
+        "label": "Quote Font (CSS name)",
+        "default": "Cormorant Garamond, serif"
+      },
+      {
+        "type": "text",
+        "id": "font_body",
+        "label": "Body Font (CSS name)",
+        "default": "DM Sans, sans-serif"
+      },
+      {
+        "type": "header",
+        "content": "Brand Settings"
+      },
+      {
+        "type": "text",
+        "id": "brand_name",
+        "label": "Brand Name",
+        "default": "AARTH"
+      },
+      {
+        "type": "text",
+        "id": "brand_tagline",
+        "label": "Brand Tagline",
+        "default": "Move with Meaning."
+      },
+      {
+        "type": "text",
+        "id": "hero_tagline",
+        "label": "Hero Tagline",
+        "default": "A language only the soul understands."
+      },
+      {
+        "type": "text",
+        "id": "hero_top_text",
+        "label": "Hero Top Text",
+        "default": "Move with Meaning"
+      },
+      {
+        "type": "text",
+        "id": "founder_name",
+        "label": "Founder Name",
+        "default": "Hitarth Joshi"
+      },
+      {
+        "type": "text",
+        "id": "instagram_handle",
+        "label": "Instagram Handle",
+        "default": "@aarth.uk"
+      },
+      {
+        "type": "image_picker",
+        "id": "founder_image",
+        "label": "Founder Portrait Image"
+      },
+      {
+        "type": "header",
+        "content": "Collection Settings"
+      },
+      {
+        "type": "collection",
+        "id": "featured_collection",
+        "label": "Featured Collection for Products Grid"
+      },
+      {
+        "type": "range",
+        "id": "products_per_row",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "unit": "col",
+        "label": "Products Per Row",
+        "default": 2
+      }
+    ]
+  }
+]

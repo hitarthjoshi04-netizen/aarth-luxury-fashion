@@ -1,0 +1,59 @@
+{% stylesheet %}
+  .philosophy {
+    padding: 8rem 4rem;
+    text-align: center;
+  }
+
+  .philosophy-quote {
+    font-family: {{ section.settings.font_quote }};
+    font-size: 2.5rem;
+    font-style: italic;
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .philosophy-text {
+    font-size: 0.95rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .philosophy {
+      padding: 4rem 2rem;
+    }
+
+    .philosophy-quote {
+      font-size: 1.5rem;
+    }
+  }
+{% endstylesheet %}
+
+<section class="philosophy" id="philosophy" style="background: {{ section.settings.color_light }}; color: {{ section.settings.color_background }};">
+  <p class="philosophy-quote" style="color: {{ section.settings.color_background }};">{{ section.settings.philosophy_quote }}</p>
+  <p class="philosophy-text" style="color: {{ section.settings.color_taupe }};">{{ section.settings.philosophy_text }}</p>
+</section>
+
+{% schema %}
+  {
+    "name": "Philosophy Section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "philosophy_quote",
+        "label": "Philosophy Quote",
+        "default": "We don't make clothes. We carry stories forward."
+      },
+      {
+        "type": "textarea",
+        "id": "philosophy_text",
+        "label": "Philosophy Description",
+        "default": "Each piece is carefully crafted with intention, rooted in heritage and woven with meaning. AARTH represents more than fashion—it's a conversation between tradition and contemporary expression, between the soul and the world."
+      }
+    ]
+  }
+{% endschema %}

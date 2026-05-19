@@ -1,0 +1,43 @@
+{% stylesheet %}
+  .editorial-section {
+    padding: 10rem 4rem;
+    text-align: center;
+  }
+
+  .editorial-quote {
+    font-family: {{ section.settings.font_quote }};
+    font-size: 3rem;
+    font-style: italic;
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 768px) {
+    .editorial-section {
+      padding: 4rem 2rem;
+    }
+
+    .editorial-quote {
+      font-size: 1.8rem;
+    }
+  }
+{% endstylesheet %}
+
+<section class="editorial-section" style="background: {{ section.settings.color_background }};">
+  <p class="editorial-quote" style="color: {{ section.settings.color_accent }};">{{ section.settings.editorial_quote }}</p>
+</section>
+
+{% schema %}
+  {
+    "name": "Editorial Quote",
+    "settings": [
+      {
+        "type": "text",
+        "id": "editorial_quote",
+        "label": "Quote Text",
+        "default": "Rooted in Gujarat. Worn by the world."
+      }
+    ]
+  }
+{% endschema %}
